@@ -52,7 +52,17 @@ configure :development do
   config[:css_dir] = "./dist"
 end
 
-# configure :build do
-#   activate :minify_css
-#   activate :minify_javascript
-# end
+configure :build do
+  activate :minify_css
+  activate :minify_javascript
+  set :relative_links, true
+  # Use relative URLs
+  activate :relative_assets
+  # Append hashes to compiled assets
+  activate :asset_hash
+end
+
+activate :deploy do |deploy|
+  deploy.deploy_method = :git
+  deploy.branch = 'gh-pages'
+end
